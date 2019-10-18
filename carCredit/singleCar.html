@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    .table{
+        width: 50%;
+        
+    }
+    img{
+    height: 400px;
+    position: relative;
+    left: 700px;
+    bottom: 320px;
+}
+.credit{
+    position: relative;
+    bottom: 302px;
+    right: 300px;
+    width: 400px;
+    
+}
+.kredit {
+    width: 257px;
+    position: absolute;
+    left: 700px;
+    top: 87px;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <table class="table table-striped">
+        <tbody>
+
+        </tbody>
+    </table>
+<script src="cars.js"></script>
+    <script>
+        let object = localStorage.getItem('Qaya');
+        let changedItem = JSON.parse(object);
+
+
+        
+        let tableBody = document.getElementsByTagName('tbody')[0];
+        for (let a in changedItem) {
+            let tr = document.createElement('tr');
+            let th = document.createElement('th');
+            let td = document.createElement('td');
+            if (a == "img") {
+                let img=document.createElement('img');
+                img.src=changedItem[a];
+                document.body.appendChild(img);
+            }
+            else {
+                th.innerText = a;
+                tr.appendChild(th);
+                td.innerText = changedItem[a];
+                tr.appendChild(td);
+                tableBody.appendChild(tr);
+            }
+
+        }
+    </script>
+
+
+
+
+   <!-- odenish sistemi -->
+
+
+<div class="container credit">
+
+        <h2>Turbo.az</h2><br>
+        <form>
+            <div class="form-group">
+                <label>Kartin nomresi</label>
+                <input id="cardNumber" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Bitme Tarixi (Ay/il)</label>
+                <input  id="cardDate" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                    <label>CVV2/CVC2</label>
+                    <input  id="cardCvv" type="text" class="form-control">
+            </div>
+            <button class="btn btn-success">Pay</button><br><br>
+            
+        </form>
+        <form class="kredit">
+                <h2>kredit shertleri</h2>
+                <button class="btn btn-warning" id="6ay">6 ay</button>
+                <button class="btn btn-warning" id="12ay">12 ay</button>
+                <button class="btn btn-warning" id="18ay">18 ay</button><br>
+                <label>ilkin odeyeceyiviz meblegi daxil edin</label>
+                <input type="text" id="pul"  class="form-control">
+                <label>qaliq mebleg</label>
+                <input type="text" class="form-control" id="tut">
+                <label>Ayliq odenis</label>
+                <input type="text" class="form-control" id="tut1"
+        </form>
+    </div>
+        <script>
+        let kredit1 = document.getElementById('6ay');
+        kredit1.addEventListener('click',function(e){
+            e.preventDefault();
+          let b = parseInt(document.getElementById('pul').value);
+          document.getElementById('tut1').value=( (changedItem.price - b )*1.04/6)
+           document.getElementById('tut').value=(changedItem.price-b);
+           
+
+        })
+
+        let kredit2 = document.getElementById('12ay');
+        kredit2.addEventListener('click',function(e){
+            e.preventDefault();
+          let b = parseInt(document.getElementById('pul').value);
+          document.getElementById('tut1').value=( (changedItem.price - b )*1.1/12);
+           document.getElementById('tut').value=(changedItem.price-b);
+
+        })
+
+        let kredit3 = document.getElementById('18ay');
+        kredit3.addEventListener('click',function(e){
+            e.preventDefault();
+          let b = parseInt(document.getElementById('pul').value);
+          document.getElementById('tut1').value=( (changedItem.price - b )*1.14/18);
+           document.getElementById('tut').value=(changedItem.price-b);
+           
+
+        })
+        </script>
+
+</body>
+
+</html>
